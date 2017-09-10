@@ -7,13 +7,21 @@
 <body>
 <div id="app">
     <h1>{{ message }}</h1>
-    <input v-model="message">
-
-    <!--<pre>{{ $data | json }}</pre>-->
+    <input v-model="message" @keyup.13="say(message)">
+    <!--
+        "@" - псевдоним аттирбута "v-on";
+        ".13" - модификатор клавиши
+    -->
 
     <ul>
         <li v-for="bear in bears" :class="{ strike: bear.deleted }">{{ bear.name }}</li>
     </ul>
+
+    <form>
+        <input type="submit" @click.prevent="myMethod">
+        <!-- ".prevent" - модификатор события -->
+    </form>
+
 
 </div>
 <script src="js/vue.js"></script>
@@ -40,7 +48,16 @@
                     deleted: false
                 }
             ]
+        },
+        methods : {
+            myMethod : function () {
+                alert("Кликнуто");
+            },
+            say : function (mess) {
+                alert(mess);
+            }
         }
+
     });
 </script>
 </body>
